@@ -1,9 +1,15 @@
 import React from "react";
+import css from './Music.module.css';
 
 const Music = () => {
     return (
-        <div>
-            Music
+        <div className={css.music_box}>
+            <div>
+                Music
+            </div>
+            <div>
+                Music
+            </div>
         </div>
     )
 }
