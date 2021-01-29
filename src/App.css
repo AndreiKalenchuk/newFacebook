@@ -1,15 +1,21 @@
 .app-wrapper {
-    margin: 0 auto;
-    width: 1200px;
     display: grid;
+    max-width: 1400px;
+    margin: 0 auto;
     grid-template-areas:
-        'h h' 'n c';
-    grid-template-rows: 60px 1fr;
+  'header header'
+  'navigation content';
+    grid-template-rows: 50px 10fr;
     grid-template-columns: 2fr 10fr;
-    /* grid-gap: 10px; */
+    grid-gap: 5px;
 }
 
+/*.main-navigation {*/
+/*    grid-area: navigation;*/
+/*    border: 1px solid green;*/
+/*}*/
+
 .app-wrapper-content {
-    grid-area: c;
-    background: aliceblue;
+    grid-area: content;
+    background-color: aliceblue;
 }

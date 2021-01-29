@@ -1,21 +1,20 @@
 import React from 'react';
-import s from './Dialogs.modules.css';
+import css from './Dialogs.module.css';
 
-const Dialogs = () => {
+
+const Dialogs = (props) => {
     return (
-      <div className={s.dialogs}>
-          <div className={s.dialogItem}>
-              <div>
-                  ANTON
-              </div>
-          </div>
-
-          <div>
-              <div>
-                  jjjjj
-              </div>
-          </div>
-      </div>
+        <div className={css.dialogs_box}>
+            <div className={css.dialogs_items}>
+                Andrey
+            </div>
+            <div className={css.messages}>
+                <div>
+                    hello
+                </div>
+            </div>
+        </div>
     )
 }
+
 export default Dialogs;
