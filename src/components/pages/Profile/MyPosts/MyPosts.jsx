@@ -1,23 +1,32 @@
 import React from 'react';
-import s from './MyPosts.module.css'
+import css from './MyPosts.module.css'
 import Post from "./Post/Post";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+    const postsList = [
+        {id: 1, msg: 'Hello, how are you been', likesCount: 2},
+        {id: 2, msg: 'Pass a hammer to me, please', likesCount: 24},
+        {id: 3, msg: 'Hello, I\'m Ok!', likesCount: 25},
+        {id: 4, msg: 'Hello, initial commit', likesCount: 12}
+    ];
+    const postsItems = postsList.map(post => <Post message={post.msg} id={post.id} likesCount={post.likesCount}/>);
+
     return (
-        <div className={s.content}>
+        <div className={css.content}>
             <div>
-                My posts
+                <h3>My posts</h3>
                 <div>
+                    <div>
                     <textarea placeholder='type a message'
                               name="text">
                     </textarea>
-                    <button> Add post</button>
+                    </div>
+                    <div>
+                        <button className={css.submitBtn}> Add post</button>
+                    </div>
                 </div>
                 <div>
-                    <Post message='Hello, how are you been?' likesCount='1'/>
-                    <Post message='Pass a hammer to me, please' likesCount='4'/>
-                    <Post message="I'm Ok!" likesCount='9'/>
-                    <Post message='initial commit' likesCount='411'/>
+                    {postsItems}
                 </div>
             </div>
         </div>

@@ -1,4 +1,7 @@
 .content {
-    grid-area: c;
     background: aliceblue;
+    padding: 10px;
+}
+.submitBtn {
+    margin: 5px;
 }
