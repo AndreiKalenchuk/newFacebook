@@ -2,16 +2,14 @@
 .dialogs_box {
     display: grid;
     grid-template-columns: 2fr 10fr;
+    padding: 10px;
 }
 
 .dialogs_items {
-    padding: 10px;
+padding: 1px;
 }
 
 .dialogs_items .active {
     color: goldenrod;
 }
 
-.messages {
-    padding: 10px;
-}

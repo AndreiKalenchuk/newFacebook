@@ -1,16 +1,11 @@
 import React from 'react';
-import tree from '../../../tree.jpg'
 import MyPosts from "./MyPosts/MyPosts";
+import ProfileInfo from "./ProfileInfo/ProfileInfo";
 
 const Profile = (props) => {
     return (
         <div>
-            <div>
-                <img src={tree}/>
-            </div>
-            <div>
-                ava + personal info
-            </div>
+            <ProfileInfo/>
             <MyPosts/>
         </div>
     )

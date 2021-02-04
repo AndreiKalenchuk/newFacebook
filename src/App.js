@@ -7,19 +7,22 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import Music from "./components/pages/Music/Music";
 import News from "./components/pages/News/News";
 import Settings from "./components/pages/Settings/Settings";
+import Home from "./components/Home/Home";
+
 function App(props) {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
+                {/*<Home/>*/}
 
                 <div className='app-wrapper-content'>
-                    <Route path='/profile' component={Profile}/>
+                    <Route exact path='/profile' component={Profile}/>
                     <Route path='/dialogs' component={Dialogs}/>
-                    <Route path='/music' component={Music}/>
-                    <Route path='/news' component={News}/>
-                    <Route path='/settings' component={Settings}/>
+                    <Route exact path='/music' component={Music}/>
+                    <Route exact path='/news' component={News}/>
+                    <Route exact path='/settings' component={Settings}/>
                 </div>
             </div>
         </BrowserRouter>

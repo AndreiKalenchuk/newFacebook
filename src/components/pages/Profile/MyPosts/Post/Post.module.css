@@ -3,9 +3,13 @@
 }
 
 .item img {
-    width: 30px;
+    width: 50px;
 }
 
 .like {
-    width: 40px;
+   padding: 1px;
+}
+
+.like img {
+    width: 20px;
 }
