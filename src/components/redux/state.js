@@ -1,3 +1,5 @@
+import {renderEntireTree} from "../../render";
+
 export const state = {
     profilePage: {
         posts: [
@@ -6,6 +8,7 @@ export const state = {
             {id: 3, msg: 'Hello, I\'m Ok!', likesCount: 25},
             {id: 4, msg: 'Hello, initial commit', likesCount: 12}
         ],
+        newPostText: ''
     },
     dialogsPage: {
         dialogs: [
@@ -23,4 +26,19 @@ export const state = {
             {id: 4, message: 'Go home'},
         ],
     }
+}
+
+export const addPost = () => {
+    const msg = {
+        id: 5,
+        msg: state.profilePage.newPostText,
+        likesCount: 0
+    }
+    state.profilePage.posts.push(msg);
+    renderEntireTree(state);
+}
+
+export const updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    renderEntireTree(state);
 }
