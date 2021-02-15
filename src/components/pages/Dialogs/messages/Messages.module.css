@@ -1,3 +1,10 @@
 .messages {
 padding: 1px;
 }
+
+.dialogWrapper {
+
+}
+.submitButton {
+    margin: 5px;
+}
