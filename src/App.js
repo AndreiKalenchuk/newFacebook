@@ -19,11 +19,10 @@ function App(props) {
                 <div className='app-wrapper-content'>
                     {/*<Route exact path='/' render={() => <Home/>}/>*/}
                     <Route exact path='/profile' render={() => <Profile
-                        updatePostText = {props.updatePostText}
-                        profilePage={props.state._state.profilePage}
-                        addPost={props.addPost}
+                        profilePage={props.state.profilePage}
+                        dispatch={props.dispatch}
                     />}/>
-                    <Route path='/dialogs' render={() => <Dialogs state={props._state.dialogsPage}/>}/>
+                    <Route path='/dialogs' render={() => <Dialogs state={props.state.dialogsPage}/>}/>
                     <Route exact path='/music' render={() => <Music/>}/>
                     <Route exact path='/news' render={() => <News/>}/>
                     <Route exact path='/settings' render={() => <Settings/>}/>
