@@ -7,7 +7,7 @@ const store = {
                 {id: 3, msg: 'Hello, I\'m Ok!', likesCount: 25},
                 {id: 4, msg: 'Hello, initial commit', likesCount: 12}
             ],
-            newPostText: '',
+            newPostText: null,
         },
         dialogsPage: {
             dialogs: [
@@ -37,7 +37,6 @@ const store = {
         this._callSubscriber = observer;
     },
 
-
     dispatch(action) {  // action is { type: 'ADD-POST'}
         if (action.type === 'ADD-POST') {
             const posts = this._state.profilePage.posts;
@@ -57,7 +56,17 @@ const store = {
 
         return action;
     }
-
 }
+
+const actions = {
+    ADD_POST: 'ADD-POST',
+    UPDATE_NEW_POST_TEXT: 'UPDATE-NEW-POST-TEXT'
+}
+
+export const addPostActionCreator = () => ({type: actions.ADD_POST})
+export const updateNewPostTextActionCreator = (text) => ({
+    type: actions.UPDATE_NEW_POST_TEXT, newText: text
+})
+
 export default store;
 // store OOP
