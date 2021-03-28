@@ -1,7 +1,7 @@
 import profileReducer from "./profile_reducer";
 import dialogsReducer from "./dialogs_reducer";
 
-const store = {
+const local_Store = {
     _state: {
         profilePage: {
             posts: [
@@ -49,5 +49,5 @@ const store = {
     }
 }
 
-export default store;
-// store OOP
+export default local_Store;
+// local_Store OOP
