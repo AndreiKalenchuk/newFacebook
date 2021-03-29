@@ -7,15 +7,13 @@ const MyPosts = (props) => {
         <Post message={post.msg} id={post.id} likesCount={post.likesCount}
               increaseLikeCount={props.increaseLikeCount}/>);
 
-    const newElementText = React.createRef();
-
     const onAddNewPostClick = () => {
-        if (newElementText.current.value !== '') {
+        if (props.value) {
             props.addNewPost();
         }
     }
-    const onPostChange = () => {
-        const text = newElementText.current.value;
+    const onPostChange = (event) => {
+        const text = event.target.value;
         props.updateNewPostText(text);
     }
 
@@ -26,7 +24,6 @@ const MyPosts = (props) => {
                 <div>
                     <div>
                     <textarea onChange={onPostChange}
-                              ref={newElementText}
                               placedholder='type a message'
                               value={props.value}/>
                     </div>
