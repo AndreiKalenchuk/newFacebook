@@ -1,11 +1,10 @@
 import React from 'react';
 import css from './Post.module.css';
-import {increaseLikeCountActionCreator} from "../../../../redux/profile_reducer";
 
 const Post = (props) => {
     const onLikeClick = () => {
         const index = props.id;
-        props.dispatch(increaseLikeCountActionCreator(index));
+        props.increaseLikeCount(index);
     }
 
     return (

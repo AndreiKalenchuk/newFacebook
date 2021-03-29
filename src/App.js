@@ -18,10 +18,7 @@ function App(props) {
                 {/*<Home/>*/}
                 <div className='app-wrapper-content'>
                     {/*<Route exact path='/' render={() => <Home/>}/>*/}
-                    <Route exact path='/profile' render={() => <Profile
-                        profilePage={props.state.profilePage}
-                        dispatch={props.dispatch}
-                    />}/>
+                    <Route exact path='/profile' render={() => <Profile store={props.store}/>}/>
                     <Route path='/dialogs' render={() => <Dialogs store={props.store}/>}/>
                     <Route exact path='/music' render={() => <Music/>}/>
                     <Route exact path='/news' render={() => <News/>}/>
