@@ -9,35 +9,37 @@ const initialState = {
         {id: 2, msg: 'Hello, I\'m Ok!', likesCount: 25},
         {id: 3, msg: 'Hello, initial commit', likesCount: 12}
     ],
-    newPostText: null,
+    newPostText: '',
 }
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_POST:
-            const posts = state.posts;
-            if (posts.length === 0) {
-                posts.push({
-                    id: 0,
-                    msg: state.newPostText,
-                    likesCount: 0
-                })
+        case ADD_POST: {
+            let newState = {...state};
+            if (state.posts.length === 0) {
+                newState.posts = [...state.posts, {id: 0, msg: newState.newPostText, likesCount: 0}];
             } else {
-                let id = posts[posts.length - 1].id;
+                let id = state.posts[state.posts.length - 1].id;
                 const msg = {
                     id: ++id,
-                    msg: state.newPostText,
+                    msg: newState.newPostText,
                     likesCount: 0
                 }
-                state.posts.push(msg);
+                newState.posts = [...state.posts, msg];
             }
-            state.newPostText = '';
-            return state;
+            newState.newPostText = '';
+            return newState;
+        }
         case UPDATE_NEW_POST_TEXT:
-            state.newPostText = action.newText;
-            return state;
+            return {
+                ...state,
+                newPostText: action.newText
+            }
         case INCREASE_LIKES_COUNT:
-            state.posts[action.index].likesCount += 1;
-            return state;
+            let newState = {
+                posts: [...state.posts]
+            }
+            newState.posts[action.index].likesCount += 1;
+            return newState
         default:
             return state;
     }
