@@ -8,15 +8,15 @@ import News from "./components/pages/News/News";
 import Settings from "./components/pages/Settings/Settings";
 import DialogsContainer from "./components/pages/Dialogs/DialogsContainer";
 
-function App(props) {
+function App() {
     return (
         <BrowserRouter>
             <div className='app-wrapper'>
                 <Header/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
-                    <Route exact path='/profile' render={() => <Profile store={props.store}/>}/>
-                    <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
+                    <Route exact path='/profile' render={() => <Profile/>}/>
+                    <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route exact path='/music' render={() => <Music/>}/>
                     <Route exact path='/news' render={() => <News/>}/>
                     <Route exact path='/settings' render={() => <Settings/>}/>
