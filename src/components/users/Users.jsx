@@ -1,35 +1,39 @@
 import React from "react";
-import * as axios from "axios";
 import defaultPhoto from '../../../src/assets/imegess/unknownUser.png';
 import css from './users.module.css'
 
-class UsersClass extends React.Component {
-    constructor(props) {
-        super(props);
-        axios.get('https://social-network.samuraijs.com/api/1.0/users').then(res => {
-            this.props.setUsers(res.data.items);
-        })
+const Users = (props) => {
+    const pagesCount = Math.ceil(props.usersCount / props.pageSize);
+    const pagesCountTotal = [];
+
+    for (let i = 1; i <= pagesCount; i++) {
+        pagesCountTotal.push(
+            <span className={props.currentPage === i && css.selectedPage}
+                  onClick={() => {
+                      props.onPageChange(i)
+                  }}>{' ' + i}
+                    </span>)
     }
 
-    render() {
-        return <div>
-            {
-                this.props.users.map(user => <div key={user.id}>
+    return <div>
+        <div> {pagesCountTotal} </div>
+        {
+            props.users.map(user => <div key={user.id}>
                 <span>
                    <div> <img className={css.img} src={user.photos.small ? user.photos.small : defaultPhoto}/>
                    </div>
                     <div>
                         {user.followed
                             ? <button onClick={() => {
-                                this.props.unFollowUser(user.id)
+                                props.unFollowUser(user.id)
                             }}> Unfollow</button>
                             : <button onClick={() => {
-                                this.props.followUser(user.id)
+                                props.followUser(user.id)
                             }}> Follow </button>}
                     </div>
 
                 </span>
-                    <span>
+                <span>
                     <span>
                         <div>{user.name}</div>
                         <div>{user.status}</div>
@@ -39,12 +43,9 @@ class UsersClass extends React.Component {
                         <div>{'PA'}</div>
                     </span>
                 </span>
-                </div>)
-
-            }
-        </div>
-    }
-
+            </div>)
+        }
+    </div>
 }
 
-export default UsersClass;
+export default Users;
