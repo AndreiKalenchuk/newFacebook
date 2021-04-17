@@ -5,15 +5,13 @@ import Messages from "./messages/Messages";
 
 class Dialogs extends React.Component {
 
-        dialogsPage = this.props.dialogsPage;
-        dialogsItems = this.dialogsPage.dialogs.map(dialog => <DialogItem key={dialog.id} name={dialog.name}
+        dialogsItems = this.props.dialogsPage.dialogs.map(dialog => <DialogItem key={dialog.id} name={dialog.name}
                                                                           id={dialog.id}/>);
-        messagesItems = this.dialogsPage.messages.map(messages => <Messages key={messages.id} msg={messages.message}
+        messagesItems = this.props.dialogsPage.messages.map(messages => <Messages key={messages.id} msg={messages.message}
                                                                             id={messages.id}/>);
-        newMessageBody = this.dialogsPage.newMessageBody;
 
         onSendMessageClick = () => {
-            if (this.newMessageBody) {
+            if (this.props.dialogsPage.newMessageBody) {
                 this.props.sendMessage();
             }
         }
@@ -32,7 +30,7 @@ class Dialogs extends React.Component {
                 <div>
                     <div> {this.messagesItems}</div>
                     <div>
-                        <div>< textarea value={this.newMessageBody}
+                        <div>< textarea value={this.props.dialogsPage.newMessageBody}
                                         placeholder='Enter a message'
                                         onChange={this.onNewMessageChange}>message</textarea>
                         </div>
