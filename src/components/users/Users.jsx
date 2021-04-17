@@ -1,6 +1,7 @@
 import React from "react";
 import defaultPhoto from '../../../src/assets/imegess/unknownUser.png';
 import css from './users.module.css'
+import Preloader from "../common/preloaders/preloader";
 
 const Users = (props) => {
     const pagesCount = Math.ceil(props.usersCount / props.pageSize);
@@ -17,6 +18,7 @@ const Users = (props) => {
 
     return <div>
         <div> {pagesCountTotal} </div>
+        {props.isFetching && <Preloader/>}
         {
             props.users.map(user => <div key={user.id}>
                 <span>

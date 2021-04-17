@@ -10,10 +10,10 @@ const initialState = {
         {id: 5, name: 'Bedlla'},
     ],
     messages: [
-        {id: 1, message: 'Yoou'},
-        {id: 2, message: 'What is up?'},
-        {id: 3, message: 'What ?'},
-        {id: 4, message: 'Go'},
+        {id: 0, message: 'Yoou'},
+        {id: 1, message: 'What is up?'},
+        {id: 2, message: 'What ?'},
+        {id: 3, message: 'Go'},
         {id: 4, message: 'Go home'},
     ],
     newMessageBody: '',
@@ -28,14 +28,13 @@ const dialogsReducer = (state = initialState, action) => {
             }
         case SEND_MESSAGE:
             let newState = {
-                ...state,
-                messages: [...state.messages]
+                ...state
             }
             const msg = {
-                id: newState.messages.length,
-                message: newState.newMessageBody
+                id: state.messages.length,
+                message: state.newMessageBody
             }
-            newState.messages.push(msg);
+            newState.messages = [...state.messages, msg];
             newState.newMessageBody = '';
             return newState;
         default:
