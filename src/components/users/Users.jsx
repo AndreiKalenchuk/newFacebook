@@ -2,6 +2,7 @@ import React from "react";
 import defaultPhoto from '../../../src/assets/imegess/unknownUser.png';
 import css from './users.module.css'
 import Preloader from "../common/preloaders/preloader";
+import {NavLink} from "react-router-dom";
 
 const Users = (props) => {
     const pagesCount = Math.ceil(props.usersCount / props.pageSize);
@@ -22,7 +23,11 @@ const Users = (props) => {
         {
             props.users.map(user => <div key={user.id}>
                 <span>
-                   <div> <img className={css.img} src={user.photos.small ? user.photos.small : defaultPhoto}/>
+                   <div>
+                       <NavLink to={`profile/${user.id}`}>
+                       <img className={css.img}
+                            src={user.photos.small ? user.photos.small : defaultPhoto}/>
+                       </NavLink>
                    </div>
                     <div>
                         {user.followed
