@@ -12,6 +12,7 @@ const mapStateToProps = (state) => {
         value: state.profilePage.newPostText,
     }
 };
-const MyPostsContainer = connect(mapStateToProps, {addNewPost, updateNewPostText, increaseLikeCount})(MyPosts);
+const MyPostsContainer = connect(mapStateToProps,
+    {addNewPost, updateNewPostText, increaseLikeCount})(MyPosts);
 
 export default MyPostsContainer;

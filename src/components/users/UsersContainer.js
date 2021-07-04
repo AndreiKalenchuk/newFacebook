@@ -16,22 +16,28 @@ class UsersContainer extends React.Component {
         this.props.setToggledIsFetching(true);
         const currentPage = this.props.currentPage;
         const count = this.props.pageSize;
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${count}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${count}`, {
+            withCredentials: true
+        })
             .then(res => {
                 this.props.setToggledIsFetching(false);
                 this.props.setUsers(res.data.items);
                 this.props.setUsersTotalCount(res.data.totalCount);
             })
+            .catch(err => console.log(err));
     }
 
     onPageChange = (i) => {
         this.props.setToggledIsFetching(true);
         this.props.setCurrentPage(i);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${i}&count=${this.props.pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${i}&count=${this.props.pageSize}`, {
+            withCredentials: true
+        })
             .then(res => {
                 this.props.setToggledIsFetching(false);
                 this.props.setUsers(res.data.items);
             })
+            .catch(err => console.log(err));
     }
 
     render() {
