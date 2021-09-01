@@ -3,6 +3,7 @@ import defaultPhoto from "../../../src/assets/imegess/unknownUser.png"
 import css from './users.module.css'
 import Preloader from "../common/preloaders/preloader";
 import {NavLink} from "react-router-dom";
+import {usersApi} from "../../api/api";
 
 
 const US = (props) => {
@@ -10,13 +11,29 @@ const US = (props) => {
                        <span>
                    <div>
                        <NavLink to={`profile/${user.id}`}>
-                       <img
-                           src={user.photos.small ? user.photos.small : defaultPhoto}/>
+                       <img src={user.photos.small ? user.photos.small : defaultPhoto}/>
                        </NavLink>
-
                    </div>
                     <div>
-                     <button> click</button>
+                        {user.followed ?
+                            <button onClick={() => {
+                                usersApi.unFollowUser(user.id).then(data => {
+                                    if (data.resultCode === 0) {
+                                        props.setFollowUnfollowUser(user.id, false)
+                                    }
+                                })
+                                    .catch(error => console.log(error));
+                            }
+                            }> Unfollow </button> :
+                            <button onClick={() => {
+                                usersApi.followUser(user.id).then(data => {
+                                    if (data.resultCode === 0) {
+                                        props.setFollowUnfollowUser(user.id, true)
+                                    }
+                                })
+                                    .catch(error => console.log(error));
+                            }}> Follow </button>
+                        }
                     </div>
 
                 </span>

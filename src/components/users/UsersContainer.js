@@ -1,42 +1,35 @@
 import React from "react";
 import {connect} from "react-redux";
-import * as axios from "axios";
 import {
-    followUser,
     setCurrentPage,
     setUsers,
-    unFollowUser,
     setUsersTotalCount,
-    setToggledIsFetching
+    setToggledIsFetching, setFollowUser, setUnFollowUser
 } from "../redux/users-reducer";
 import Users from "./Users";
+import {usersApi} from "../../api/api";
+
 
 class UsersContainer extends React.Component {
     componentDidMount() {
         this.props.setToggledIsFetching(true);
         const currentPage = this.props.currentPage;
         const count = this.props.pageSize;
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${count}`, {
-            withCredentials: true
+        usersApi.getUsers(currentPage, count).then(data => {
+            this.props.setToggledIsFetching(false);
+            this.props.setUsers(data.items);
+            this.props.setUsersTotalCount(data.totalCount);
         })
-            .then(res => {
-                this.props.setToggledIsFetching(false);
-                this.props.setUsers(res.data.items);
-                this.props.setUsersTotalCount(res.data.totalCount);
-            })
             .catch(err => console.log(err));
     }
 
-    onPageChange = (i) => {
+    onPageChange = (pageNumber) => {
         this.props.setToggledIsFetching(true);
-        this.props.setCurrentPage(i);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${i}&count=${this.props.pageSize}`, {
-            withCredentials: true
+        this.props.setCurrentPage(pageNumber);
+        usersApi.getUsers(pageNumber, this.props.pageSize).then(data => {
+            this.props.setToggledIsFetching(false);
+            this.props.setUsers(data.items);
         })
-            .then(res => {
-                this.props.setToggledIsFetching(false);
-                this.props.setUsers(res.data.items);
-            })
             .catch(err => console.log(err));
     }
 
@@ -47,8 +40,8 @@ class UsersContainer extends React.Component {
                    currentPage={this.props.currentPage}
                    onPageChange={this.onPageChange}
                    users={this.props.users}
-                   unFollowUser={this.props.unFollowUser}
-                   followUser={this.props.followUser}
+                   setUnFollowUser={this.props.setUnFollowUser}
+                   setFollowUser={this.props.setFollowUser}
                    isFetching={this.props.isFetching}
             />
         </>
@@ -66,10 +59,10 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    followUser,
+    setFollowUser,
     setCurrentPage,
     setUsers,
-    unFollowUser,
+    setUnFollowUser,
     setUsersTotalCount,
     setToggledIsFetching
 })

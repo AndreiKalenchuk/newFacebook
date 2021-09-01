@@ -3,7 +3,7 @@ import defaultPhoto from '../../../src/assets/imegess/unknownUser.png';
 import css from './users.module.css'
 import Preloader from "../common/preloaders/preloader";
 import {NavLink} from "react-router-dom";
-import * as axios from "axios";
+import {usersApi} from "../../api/api";
 
 const Users = (props) => {
     const pagesCount = Math.ceil(props.usersCount / props.pageSize);
@@ -17,32 +17,19 @@ const Users = (props) => {
                     </span>)
     }
     const onFollowBtnClick = (userId) => {
-        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
-            withCredentials: true,
-            headers: {
-                'API-KEY': 'baf52fc7-ee31-49b9-86d7-d8c068e1112a'
-            }
-        })
-            .then(res => {
-                if (res.data.resultCode === 0) {
-                    props.followUser(userId)
+        usersApi.followUser(userId).then(data => {
+                if (data.resultCode === 0) {
+                    props.setFollowUser(userId);
                 }
             })
             .catch(err => console.log(err));
     }
 
     const onUnfollowBtnClick = (userId)=> {
-        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
-            withCredentials: true,
-            headers: {
-                'API-KEY': 'baf52fc7-ee31-49b9-86d7-d8c068e1112a'
-            }
-        })
-            .then(res => {
-                if (res.data.resultCode === 0) {
-                    props.unFollowUser(userId)
+        usersApi.unFollowUser(userId).then(data => {
+                if (data.resultCode === 0) {
+                    props.setUnFollowUser(userId)
                 }
-
             })
             .catch(err => console.log(err));
     }
