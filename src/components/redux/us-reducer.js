@@ -3,6 +3,7 @@ const SET_USERS = 'SET_USERS';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_FETCHING = 'SET_FETCHING';
+const FOLLOW_UNFOLLOW = 'FOLLOW_UNFOLLOW';
 
 const usReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -27,6 +28,17 @@ const usReducer = (state = initialState, action) => {
                 isFetching: action.boolean
             }
 
+        case FOLLOW_UNFOLLOW:
+            return {
+                ...state,
+                users: state.users.map(user => {
+                    if (user.id === action.userId) {
+                        return {...user, followed: action.boolean}
+                    }
+                    return user;
+                })
+            }
+
 
         default:
             return state
@@ -37,5 +49,6 @@ export const setUsers = (users) => ({type: SET_USERS, users});
 export const setTotalUsersCount = (usersCount) => ({type: SET_TOTAL_USERS_COUNT, usersCount});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export const setIsFetching = (boolean) => ({type: SET_FETCHING, boolean});
+export const setFollowUnfollowUser = (userId, boolean) => ({type: FOLLOW_UNFOLLOW, userId, boolean});
 
 export default usReducer;

@@ -1,16 +1,21 @@
 import React from "react";
 import {connect} from "react-redux";
-import * as axios from "axios"
-import {setCurrentPage, setTotalUsersCount, setUsers, setIsFetching} from "../redux/us-reducer";
+import {
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    setIsFetching,
+    setFollowUnfollowUser
+} from "../redux/us-reducer";
 import US from "./US"
+import {usersApi} from "../../api/api";
 
 class UsContainer extends React.Component {
     componentDidMount() {
         this.props.setIsFetching(true);
-        axios.get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(res => {
-                this.props.setUsers(res.data.items);
-                this.props.setTotalUsersCount(res.data.totalCount);
+        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
                 this.props.setIsFetching(false);
             })
             .catch(error => console.log(error));
@@ -18,10 +23,9 @@ class UsContainer extends React.Component {
 
     onPageClick = (currentPage) => {
         this.props.setIsFetching(true);
-        axios.get('https://social-network.samuraijs.com/api/1.0/users?page=' + currentPage)
-            .then(res => {
-                this.props.setUsers(res.data.items);
-                this.props.setTotalUsersCount(res.data.totalCount);
+        usersApi.getUsers(currentPage).then(data => {
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
                 this.props.setCurrentPage(currentPage);
                 this.props.setIsFetching(false);
 
@@ -50,5 +54,6 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    setUsers, setTotalUsersCount, setCurrentPage, setIsFetching
+    setUsers, setTotalUsersCount, setCurrentPage, setIsFetching,
+    setFollowUnfollowUser
 })(UsContainer)

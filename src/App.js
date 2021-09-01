@@ -10,6 +10,8 @@ import ProfileContainer from "./components/pages/Profile/ProfileContainer";
 import UsContainer from "./components/users/UsContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 
+import DropDown from "./components/pages/DropDown";
+
 function App() {
     return (
         <BrowserRouter>
@@ -23,6 +25,7 @@ function App() {
                     <Route exact path='/us' render={() => <UsContainer/>}/>
                     <Route exact path='/news' render={() => <News/>}/>
                     <Route exact path='/settings' render={() => <Settings/>}/>
+                    <Route exact path='/dropdown/:any?/' render={() => <DropDown/>}/>
                 </div>
             </div>
         </BrowserRouter>
