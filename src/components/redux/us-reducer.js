@@ -1,9 +1,17 @@
-let initialState = {users: [], pageSize: 100, usersCount: null, currentPage: 1, isFetching: false};
+let initialState = {
+    users: [],
+    pageSize: 100,
+    usersCount: null,
+    currentPage: 1,
+    isFetching: false,
+    followingInProgress: []
+};
 const SET_USERS = 'SET_USERS';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_FETCHING = 'SET_FETCHING';
 const FOLLOW_UNFOLLOW = 'FOLLOW_UNFOLLOW';
+const SET_FOLLOWING_IN_PROGRESS = 'SET_FOLLOWING_IN_PROGRESS';
 
 const usReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -39,6 +47,13 @@ const usReducer = (state = initialState, action) => {
                 })
             }
 
+        case SET_FOLLOWING_IN_PROGRESS:
+            return {
+                ...state,
+                followingInProgress: action.boolean
+                    ? [...state.followingInProgress, action.userId]
+                    : [state.followingInProgress.filter(user => user !== action.userId)]
+            }
 
         default:
             return state
@@ -48,7 +63,8 @@ const usReducer = (state = initialState, action) => {
 export const setUsers = (users) => ({type: SET_USERS, users});
 export const setTotalUsersCount = (usersCount) => ({type: SET_TOTAL_USERS_COUNT, usersCount});
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
-export const setIsFetching = (boolean) => ({type: SET_FETCHING, boolean});
+export const toggleIsFetching = (boolean) => ({type: SET_FETCHING, boolean});
 export const setFollowUnfollowUser = (userId, boolean) => ({type: FOLLOW_UNFOLLOW, userId, boolean});
+export const toggleFollowingInProgress = (boolean, userId) => ({type: SET_FOLLOWING_IN_PROGRESS, boolean, userId});
 
 export default usReducer;
