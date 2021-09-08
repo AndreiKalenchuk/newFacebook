@@ -2,35 +2,37 @@ import React from "react";
 import {connect} from "react-redux";
 import {
     setCurrentPage,
-    setTotalUsersCount,
-    setUsers,
-    toggleIsFetching,
-    setFollowUnfollowUser, toggleFollowingInProgress
+    setFollowUnfollowUser,
+    getUsersThunkCreator,
+    followUser,
+    unFollowUser
 } from "../redux/us-reducer";
 import US from "./US"
-import {usersApi} from "../../api/api";
 
 class UsContainer extends React.Component {
     componentDidMount() {
-        this.props.setIsFetching(true);
-        usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
-                this.props.setIsFetching(false);
-            })
-            .catch(error => console.log(error));
+        this.props.getUsers(this.props.currentPage, this.props.pageSize)
+        // this.props.setIsFetching(true);
+        // usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+        //         this.props.setUsers(data.items);
+        //         this.props.setTotalUsersCount(data.totalCount);
+        //         this.props.setIsFetching(false);
+        //     })
+        //    .catch(error => console.log(error));
     }
 
     onPageClick = (currentPage) => {
-        this.props.setIsFetching(true);
-        usersApi.getUsers(currentPage).then(data => {
-                this.props.setUsers(data.items);
-                this.props.setTotalUsersCount(data.totalCount);
-                this.props.setCurrentPage(currentPage);
-                this.props.setIsFetching(false);
-
-            })
-            .catch(error => console.log(error));
+        this.props.setCurrentPage(currentPage);
+        this.props.getUsers(currentPage, this.props.pageSize);
+        // this.props.setIsFetching(true);
+        // usersApi.getUsers(currentPage).then(data => {
+        //         this.props.setUsers(data.items);
+        //         this.props.setTotalUsersCount(data.totalCount);
+        //         this.props.setCurrentPage(currentPage);
+        //         this.props.setIsFetching(false);
+        //
+        //     })
+        //     .catch(error => console.log(error));
     }
 
     render() {
@@ -55,6 +57,7 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    setUsers, setTotalUsersCount, setCurrentPage, setIsFetching: toggleIsFetching,
-    setFollowUnfollowUser, setFollowingInProgress: toggleFollowingInProgress
+    setCurrentPage, setFollowUnfollowUser,
+    getUsers: getUsersThunkCreator,
+    followUser, unFollowUser
 })(UsContainer)

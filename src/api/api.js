@@ -22,5 +22,10 @@ export const usersApi = {
         return instance.delete(`follow/${userId}`)
             .then(response => response.data);
     }
-
 }
+
+export const authMeApi = () => {
+    return instance.get('auth/me')
+        .then(response => response.data);
+}
+
