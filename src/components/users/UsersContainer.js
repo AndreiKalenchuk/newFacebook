@@ -1,36 +1,21 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    setCurrentPage,
-    setUsers,
-    setUsersTotalCount,
-    setToggledIsFetching, setFollowUser, setUnFollowUser
+    followUser,
+    getUsers, setCurrentPage, unFollowUser
 } from "../redux/users-reducer";
 import Users from "./Users";
-import {usersApi} from "../../api/api";
-
 
 class UsersContainer extends React.Component {
     componentDidMount() {
-        this.props.setToggledIsFetching(true);
         const currentPage = this.props.currentPage;
         const count = this.props.pageSize;
-        usersApi.getUsers(currentPage, count).then(data => {
-            this.props.setToggledIsFetching(false);
-            this.props.setUsers(data.items);
-            this.props.setUsersTotalCount(data.totalCount);
-        })
-            .catch(err => console.log(err));
+        this.props.getUsers(currentPage, count);
     }
 
     onPageChange = (pageNumber) => {
-        this.props.setToggledIsFetching(true);
         this.props.setCurrentPage(pageNumber);
-        usersApi.getUsers(pageNumber, this.props.pageSize).then(data => {
-            this.props.setToggledIsFetching(false);
-            this.props.setUsers(data.items);
-        })
-            .catch(err => console.log(err));
+        this.props.getUsers(pageNumber, this.props.pageSize);
     }
 
     render() {
@@ -40,8 +25,8 @@ class UsersContainer extends React.Component {
                    currentPage={this.props.currentPage}
                    onPageChange={this.onPageChange}
                    users={this.props.users}
-                   setUnFollowUser={this.props.setUnFollowUser}
-                   setFollowUser={this.props.setFollowUser}
+                   setUnFollowUser={this.props.unFollowUser}
+                   setFollowUser={this.props.followUser}
                    isFetching={this.props.isFetching}
             />
         </>
@@ -59,11 +44,7 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    setFollowUser,
-    setCurrentPage,
-    setUsers,
-    setUnFollowUser,
-    setUsersTotalCount,
-    setToggledIsFetching
+    getUsers,
+    setCurrentPage, followUser, unFollowUser
 })
 (UsersContainer);

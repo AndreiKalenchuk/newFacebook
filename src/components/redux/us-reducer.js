@@ -62,12 +62,14 @@ const usReducer = (state = initialState, action) => {
     }
 }
 
-export const setUsers = (users) => ({type: SET_USERS, users});
-export const setTotalUsersCount = (usersCount) => ({type: SET_TOTAL_USERS_COUNT, usersCount});
+const setUsers = (users) => ({type: SET_USERS, users});
+const setTotalUsersCount = (usersCount) => ({type: SET_TOTAL_USERS_COUNT, usersCount});
+const toggleIsFetching = (boolean) => ({type: SET_FETCHING, boolean});
+const setFollowUnfollowUser = (userId, boolean) => ({type: FOLLOW_UNFOLLOW, userId, boolean});
+const toggleFollowingInProgress = (boolean, userId) => ({type: SET_FOLLOWING_IN_PROGRESS, boolean, userId});
+
 export const setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
-export const toggleIsFetching = (boolean) => ({type: SET_FETCHING, boolean});
-export const setFollowUnfollowUser = (userId, boolean) => ({type: FOLLOW_UNFOLLOW, userId, boolean});
-export const toggleFollowingInProgress = (boolean, userId) => ({type: SET_FOLLOWING_IN_PROGRESS, boolean, userId});
+/** redux thunk creator  * */
 
 export const getUsersThunkCreator = (currentPage, pageSize) => (dispatch) => {
     dispatch(toggleIsFetching(true));
