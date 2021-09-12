@@ -4,7 +4,8 @@ import {connect} from "react-redux";
 
 const mapStareToProps = (state) => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 const DialogsContainer = connect(mapStareToProps, {sendMessage, updateNewMessageBody})(Dialogs);

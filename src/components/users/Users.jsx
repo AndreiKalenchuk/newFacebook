@@ -3,7 +3,6 @@ import defaultPhoto from '../../../src/assets/imegess/unknownUser.png';
 import css from './users.module.css'
 import Preloader from "../common/preloaders/preloader";
 import {NavLink} from "react-router-dom";
-import {usersApi} from "../../api/api";
 
 const Users = (props) => {
     const pagesCount = Math.ceil(props.usersCount / props.pageSize);
@@ -17,21 +16,11 @@ const Users = (props) => {
                     </span>)
     }
     const onFollowBtnClick = (userId) => {
-        usersApi.followUser(userId).then(data => {
-                if (data.resultCode === 0) {
-                    props.setFollowUser(userId);
-                }
-            })
-            .catch(err => console.log(err));
+        props.setFollowUser(userId);
     }
 
-    const onUnfollowBtnClick = (userId)=> {
-        usersApi.unFollowUser(userId).then(data => {
-                if (data.resultCode === 0) {
-                    props.setUnFollowUser(userId)
-                }
-            })
-            .catch(err => console.log(err));
+    const onUnfollowBtnClick = (userId) => {
+        props.setUnFollowUser(userId);
     }
 
     return <div>
@@ -48,7 +37,7 @@ const Users = (props) => {
                    </div>
                     <div>
                         {user.followed ? <button onClick={() => {
-                              onUnfollowBtnClick(user.id)
+                                onUnfollowBtnClick(user.id)
                             }}> Unfollow</button>
                             : <button onClick={() => {
                                 onFollowBtnClick(user.id)

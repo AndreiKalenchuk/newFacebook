@@ -21,11 +21,16 @@ export const usersApi = {
     unFollowUser(userId) {
         return instance.delete(`follow/${userId}`)
             .then(response => response.data);
+    },
+    gutUserProfile(userId) {
+        return instance.get(`profile/${userId}`)
     }
 }
 
-export const authMeApi = () => {
-    return instance.get('auth/me')
-        .then(response => response.data);
+export const auth = {
+    authMeApi: () => {
+        return instance.get('auth/me')
+            .then(response => response.data);
+    }
 }
 

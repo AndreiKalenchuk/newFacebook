@@ -1,3 +1,5 @@
+import {usersApi} from "../../api/api";
+
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const INCREASE_LIKES_COUNT = 'INCREASE-LIKE-COUNT';
@@ -55,6 +57,13 @@ const profileReducer = (state = initialState, action) => {
 export const addNewPost = () => ({type: ADD_POST});
 export const updateNewPostText = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
 export const increaseLikeCount = (index) => ({type: INCREASE_LIKES_COUNT, index: index});
-export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
+
+export const getUserProfile = (userId) => (dispatch) => {
+    usersApi.gutUserProfile(userId)
+        .then(res => {
+            dispatch(setUserProfile(res.data));
+        })
+}
 
 export default profileReducer;

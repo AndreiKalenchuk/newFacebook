@@ -2,7 +2,6 @@ import React from "react";
 import {connect} from "react-redux";
 import {
     setCurrentPage,
-    setFollowUnfollowUser,
     getUsersThunkCreator,
     followUser,
     unFollowUser
@@ -12,27 +11,11 @@ import US from "./US"
 class UsContainer extends React.Component {
     componentDidMount() {
         this.props.getUsers(this.props.currentPage, this.props.pageSize)
-        // this.props.setIsFetching(true);
-        // usersApi.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-        //         this.props.setUsers(data.items);
-        //         this.props.setTotalUsersCount(data.totalCount);
-        //         this.props.setIsFetching(false);
-        //     })
-        //    .catch(error => console.log(error));
     }
 
     onPageClick = (currentPage) => {
         this.props.setCurrentPage(currentPage);
         this.props.getUsers(currentPage, this.props.pageSize);
-        // this.props.setIsFetching(true);
-        // usersApi.getUsers(currentPage).then(data => {
-        //         this.props.setUsers(data.items);
-        //         this.props.setTotalUsersCount(data.totalCount);
-        //         this.props.setCurrentPage(currentPage);
-        //         this.props.setIsFetching(false);
-        //
-        //     })
-        //     .catch(error => console.log(error));
     }
 
     render() {
@@ -57,7 +40,7 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps, {
-    setCurrentPage, setFollowUnfollowUser,
+    setCurrentPage,
     getUsers: getUsersThunkCreator,
     followUser, unFollowUser
 })(UsContainer)

@@ -9,6 +9,7 @@ import UsersContainer from "./components/users/UsersContainer";
 import ProfileContainer from "./components/pages/Profile/ProfileContainer";
 import UsContainer from "./components/users/UsContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
+import Login from "./components/login/login";
 
 import DropDown from "./components/pages/DropDown";
 
@@ -19,6 +20,7 @@ function App() {
                 <HeaderContainer/>
                 <Navbar/>
                 <div className='app-wrapper-content'>
+                    <Route path='/login' render={() => <Login/>}/>
                     <Route exact path='/profile/:userId?/' render={() => <ProfileContainer/>}/>
                     <Route path='/dialogs' render={() => <DialogsContainer/>}/>
                     <Route path='/users' render={() => <UsersContainer/>}/>
