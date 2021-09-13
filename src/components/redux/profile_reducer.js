@@ -60,7 +60,7 @@ export const increaseLikeCount = (index) => ({type: INCREASE_LIKES_COUNT, index:
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 
 export const getUserProfile = (userId) => (dispatch) => {
-    usersApi.gutUserProfile(userId)
+    usersApi.getUserProfile(userId)
         .then(res => {
             dispatch(setUserProfile(res.data));
         })

@@ -22,7 +22,7 @@ export const usersApi = {
         return instance.delete(`follow/${userId}`)
             .then(response => response.data);
     },
-    gutUserProfile(userId) {
+    getUserProfile(userId) {
         return instance.get(`profile/${userId}`)
     }
 }
