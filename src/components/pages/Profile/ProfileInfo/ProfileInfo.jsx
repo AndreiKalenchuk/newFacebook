@@ -3,6 +3,7 @@ import tree from '../../../../tree.jpg'
 import css from './ProfileInfo.module.css';
 import unKnownUserPhoto from "../../../../assets/imegess/unknownUser.png"
 import Preloader from "../../../common/preloaders/preloader";
+import ProfileStatus from "./ProfileStatus";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -19,6 +20,7 @@ const ProfileInfo = (props) => {
                 <img src={props.profile.photos.large ? props.profile.photos.large : unKnownUserPhoto}/>
                 </span>
 
+                <ProfileStatus status='hello everyone!! '/>
                 <span>
                 <div> About me: {props.profile.aboutMe} </div>
                 <div>Name: {props.profile.fullName}</div>
