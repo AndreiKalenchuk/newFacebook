@@ -11,6 +11,6 @@ const mapStareToProps = (state) => {
 }
 
 export default compose(
-    withAuthRedirect,
-    connect(mapStareToProps, {sendMessage, updateNewMessageBody}))
+    connect(mapStareToProps, {sendMessage, updateNewMessageBody}),
+    withAuthRedirect)
 (Dialogs);
