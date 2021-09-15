@@ -22,9 +22,24 @@ export const usersApi = {
         return instance.delete(`follow/${userId}`)
             .then(response => response.data);
     },
+// backward capability method
     getUserProfile(userId) {
-        return instance.get(`profile/${userId}`)
+        console.warn('Obsolete method, use profileApi.getUserProfile');
+        return profileApi.getUserProfile(userId);
     }
+}
+
+export const profileApi = {
+    getUserProfile(userId) {
+        return instance.get(`profile/${userId}`);
+    },
+    getStatus(userId) {
+        return instance.get(`profile/status/${userId}`);
+    },
+    updateStatus(status) {
+        return instance.put('profile/status', {status});
+    }
+
 }
 
 export const auth = {
