@@ -23,7 +23,7 @@ const LoginReduxForm = reduxForm({form: 'login'})(LoginForm);
 
 const Login = (props) => {
     const onSubmit = (formData) => {
-        console.log(formData)
+        // todo send api request
     }
     return <div>
         <h1>Login</h1>
