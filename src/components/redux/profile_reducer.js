@@ -13,7 +13,6 @@ const initialState = {
         {id: 2, msg: 'Hello, I\'m Ok!', likesCount: 25},
         {id: 3, msg: 'Hello, initial commit', likesCount: 12}
     ],
-    newPostText: '',
     profile: null,
     status: ''
 }
@@ -22,24 +21,18 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST: {
             let newState = {...state};
             if (state.posts.length === 0) {
-                newState.posts = [...state.posts, {id: 0, msg: newState.newPostText, likesCount: 0}];
+                newState.posts = [ {id: 0, msg: action.newPost, likesCount: 0}];
             } else {
                 let id = state.posts[state.posts.length - 1].id;
                 const msg = {
                     id: ++id,
-                    msg: newState.newPostText,
+                    msg: action.newPost,
                     likesCount: 0
                 }
                 newState.posts = [...state.posts, msg];
             }
-            newState.newPostText = '';
             return newState;
         }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
-            }
         case INCREASE_LIKES_COUNT:
             let newState = {
                 ...state,
@@ -61,8 +54,7 @@ const profileReducer = (state = initialState, action) => {
             return state;
     }
 }
-export const addNewPost = () => ({type: ADD_POST});
-export const updateNewPostText = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
+export const addNewPost = (newPost) => ({type: ADD_POST, newPost});
 export const increaseLikeCount = (index) => ({type: INCREASE_LIKES_COUNT, index: index});
 const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 const setStatus = (status) => ({type: SET_STATUS, status});
