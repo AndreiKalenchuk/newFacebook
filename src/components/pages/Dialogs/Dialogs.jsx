@@ -3,14 +3,20 @@ import css from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Messages from "./messages/Messages";
 import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../../common/FormsControls/FormControls";
+import {maxLengthValidator, requiredField} from "../../utils/formValidators/validators";
 
 
 class Dialogs extends React.Component {
 
-    dialogsItems = this.props.dialogsPage.dialogs.map(dialog => <DialogItem key={dialog.id} name={dialog.name}
-                                                                            id={dialog.id}/>);
-    messagesItems = this.props.dialogsPage.messages.map(messages => <Messages key={messages.id} msg={messages.message}
-                                                                              id={messages.id}/>);
+    dialogsItems = this.props.dialogsPage.dialogs.map(
+        dialog => <DialogItem key={dialog.id}
+                              name={dialog.name}
+                              id={dialog.id}/>);
+    messagesItems = this.props.dialogsPage.messages.map(
+        messages => <Messages key={messages.id}
+                              msg={messages.message}
+                              id={messages.id}/>);
 
     onSendMessage = (farmData) => {
         this.props.sendMessage(farmData.message);
@@ -31,15 +37,15 @@ class Dialogs extends React.Component {
     }
 }
 
+const maxLength100 = maxLengthValidator(100);
+
 const AddMessageForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
-                < Field component='textarea'
-                        name='message'
-                        placeholder='Enter a message'
-                />
-            </div>
+            < Field component={Textarea}
+                    name='message'
+                    placeholder='Enter a message'
+                    validate={[requiredField, maxLength100]}/>
             <div>
                 <button>Send</button>
             </div>
