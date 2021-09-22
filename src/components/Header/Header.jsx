@@ -8,9 +8,9 @@ const Header = (props) => {
         <header className={css.header}>
             <img src={logo}/>
             <div className={css.loginBlock}>
-                {props.auth.isAuth ?
-                    <div>{props.auth.login}</div> :
-                    <NavLink to={'/login'}>Login</NavLink>
+                {props.auth.isAuth
+                    ? <div>{props.auth.login} <button onClick={props.logout}>log out </button> </div>
+                    : <NavLink to={'/login'}>Login</NavLink>
                 }
             </div>
         </header>
